@@ -279,7 +279,7 @@ def train_prepossess(model):
 
     trim_rule=None
     if len(model.vocab) == 0 : #not hasattr(model, 'syn0'):
-        print 'build_vocab'
+        print('build_vocab')
         model.build_vocab(sentences, trim_rule=trim_rule)
         #print model.syn0
     
@@ -404,12 +404,12 @@ if __name__ == "__main__":
 
     vs1 = gensim.models.word2vec.Word2Vec(sents,hs=hs,negative=negative,sg=sg_v,size=v_size,iter=v_iter)
     vsk1 = Word2VecKeras(sents,hs=hs,negative=negative,sg=sg_v,size=v_size,iter=v_iter)
-    print 'compare',vsk1.compare_w2v(vs1)
+    print('compare',vsk1.compare_w2v(vs1))
     vsk1.iter=20
     vsk1.train(sents,batch_size=100,sub_batch_size=64)
-    print 'compare',vsk1.compare_w2v(vs1)
-    print vs1['the']
-    print vsk1['the']
+    print('compare',vsk1.compare_w2v(vs1))
+    print(vs1['the'])
+    print(vsk1['the'])
     print( vs1.most_similar('the', topn=topn))
     print( vsk1.most_similar('the', topn=topn))
 
@@ -424,18 +424,18 @@ if __name__ == "__main__":
     br = gensim.models.word2vec.Word2Vec(brown_sents,hs=1,negative=0,sg=sg_v,iter=v_iter)
     brk =Word2VecKeras(brown_sents,hs=1,negative=0,sg=sg_v,iter=v_iter)
 
-    print 'compare',brk.compare_w2v(br)
+    print('compare',brk.compare_w2v(br))
     brk.train(brown_sents)
-    print 'compare',brk.compare_w2v(br)
-    print brk.most_similar_cosmul(positive=['she', 'him'], negative=['he'], topn=topn)
+    print('compare',brk.compare_w2v(br))
+    print(brk.most_similar_cosmul(positive=['she', 'him'], negative=['he'], topn=topn))
 
     br_dummy = gensim.models.word2vec.Word2Vec(brown_sents,sg=sg_v,iter=1)
     copy_word2vec_instance_from_to(brk,br_dummy)
-    print br_dummy.most_similar_cosmul(positive=['she', 'him'], negative=['he'], topn=topn)
+    print(br_dummy.most_similar_cosmul(positive=['she', 'him'], negative=['he'], topn=topn))
     print(br_dummy.most_similar('the', topn=5))
 
-    print br.most_similar_cosmul(positive=['she', 'him'], negative=['he'], topn=topn)
-    print brk.most_similar_cosmul(positive=['she', 'him'], negative=['he'], topn=topn)
+    print(br.most_similar_cosmul(positive=['she', 'him'], negative=['he'], topn=topn))
+    print(brk.most_similar_cosmul(positive=['she', 'him'], negative=['he'], topn=topn))
     #print brk.most_similar('the', topn=5)
     #print(brk.most_similar('the', topn=5))
     
